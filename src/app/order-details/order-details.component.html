@@ -1,0 +1,67 @@
+<div class="orderMainContainer" fxLayout="rows wrap" fxLayoutAlign="center center" id="maincontainer"cdkFocusInitial >
+  <div class="OrderNumberHead">発注書番号：{{arrOrderDetails.orderID}}</div>
+
+  <div class="orderDetails" fxLayout="columns wrap" fxLayoutAlign="start start">
+    <div class="orderManuHead">メーカー</div>
+    <div class="orderManu">{{arrOrderDetails.manu}}</div>
+    <div class="orderManuHead">納品先店舗</div>
+    <div class="orderManu">{{arrOrderDetails.destShop}}</div>
+  </div>
+  <div class="orderDetails" fxLayout="rows wrap" fxLayoutAlign="start start">
+    <div class="orderManuHead">納品予定日</div>
+    <div class="orderManu">{{arrOrderDetails.eta * 1000 | date:'MMM d, y'}}</div>
+    <div class="orderManuHead">発送状況</div>
+    <div class="orderManu strStatus">{{arrOrderDetails.orderStatus}}</div>
+  </div>
+
+  <div class="orderDetails" fxLayout="rows wrap" fxLayoutAlign="start start">
+    <div class="orderManuHead">発注商品数</div>
+    <div class="orderManu">{{itemCountTotal}}</div>
+    <div class="orderManuHead">発注総額</div>
+    <div class="orderManu">{{GrandTotal| currency : 'JPY' }}</div>
+  </div>
+
+  <div class="orderDetailsHead">発注詳細</div>
+
+  <div class="colHead" fxLayout="columns wrap" fxLayoutAlign="start start">
+    <div class="colHeadDiv">商品コード</div>
+    <div class="colHeadDiv">個数</div>
+    <div class="colHeadDiv">単価</div>
+    <div class="colHeadDiv">商品合計金額</div>
+  </div>
+
+  <!-- <div class="colItems" fxLayout="rows wrap" fxLayoutAlign="start start" *ngFor="let items of arrayOfItems"> -->
+    <div class="colItems" fxLayout="rows wrap" fxLayoutAlign="start start">
+
+    <div class="itemDetailsDiv" fxLayout="columns wrap" fxLayoutAlign="start start">
+      {{ arrOrderDetails.itemCode }}
+    </div>
+    <div class="itemCountDiv">
+      {{ arrOrderDetails.itemCount }}
+    </div>
+    <div class="itemCountDiv">
+      {{ arrOrderDetails.itemPrice | currency : 'JPY' }}
+    </div>
+    <div class="itemCountDiv">
+      {{ SubTotal | currency : 'JPY' }}
+    </div>
+    <div class="spacerDiv"></div>
+
+  </div>
+
+  <div class="itemTotal" fxLayout="columns wrap" fxLayoutAlign="start start">
+    <div class="grandTotalHead">合計</div>
+    <div class="grandTotal">{{ GrandTotal | currency : 'JPY' }}</div>
+  </div>
+</div>
+
+<div class="mapDiv">
+<div class="mapDivHead">商品現在地</div>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]='false'[mapDraggable]='false'>
+  <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
+</agm-map>
+</div>
+
+
+
+

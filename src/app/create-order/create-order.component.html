@@ -1,0 +1,130 @@
+<div class="wrapper">
+  <!-- <div class="page-header section-dark" style="background-image: url('assets/img/okta_background_grey.png')">
+  <h1><img src="assets/img/okta_japan_white_medium.png" alt="" class="responsive"></h1>
+</div> -->
+  <div class="page-header section-dark" style="background:white">
+
+    <div class="mainContainer" fxLayout="row wrap" fxLayoutAlign="center start">
+
+      <div class="mainUserNameItem">
+        {{ OktaGetTokenService.strUserName }}
+      </div>
+
+      <div class="mainMenuItem" fxLayout="columns wrap" fxLayoutAlign="center center">
+
+        <div class="orderFormContainer">
+          <div class="orderFormHeadDiv">
+            発注書
+          </div>
+
+          <div class="OrderFormMain">
+
+            <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+
+              <div class="formInputs" fxLayout="columns wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <div>
+                  <mat-form-field appearance="fill" [style.width.px]=300>
+                    <mat-label>注文番号</mat-label>
+                    <!-- <input matInput placeholder="注文番号" value="{{randomOrderNumber}}" id="orderNo" formControlName="orderNo" type="text"> -->
+                    <input matInput type="text" formControlName="orderNo" id="orderNo" [(ngModel)]="randomOrderNumber">
+                    <mat-icon matSuffix>shopping_cart</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="fill" [style.width.px]=300>
+                    <mat-label>店舗</mat-label>
+                    <mat-select formControlName="store">
+                      <mat-option *ngFor="let store of StoreItems" [value]="store.name" name="store" id="store">
+                        {{store.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>store</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="fill" [style.width.px]=300>
+                    <mat-label>商品選択</mat-label>
+                    <mat-select (selectionChange)=ProductChange($event) disableOptionCentering [(ngModel)]="itemToOrder"
+                      formControlName="itemCode">
+                      <mat-option *ngFor="let product of ProductItems" [value]="product.itemcode" name="itemCode">
+                        {{product.itemcode}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>inventory</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="fill" [style.width.px]=300>
+                    <mat-label>個数</mat-label>
+                    <mat-select (selectionChange)=itemCountChange($event) disableOptionCentering>
+
+                      <mat-option *ngFor="let stock of ItemCount" [value]="stock.stockCount" name="itemCount">
+                        {{stock.stockCount}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>filter_1</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div class="DividerDIV">
+                  商品情報
+                </div>
+
+                <div class="productInfo" fxLayout="columns" fxLayoutAlign="center center">
+                  <div class="productLeftSmall">商品名</div>
+                  <div class="productName" name="SelectedItemName">{{selectedItemName}}</div>
+                </div>
+
+                <div class="productInfo" fxLayout="columns" fxLayoutAlign="center center">
+                  <div class="productLeftSmall">メーカー</div>
+                  <div class="productName" name="SelectedItemManu">{{SelectedItemManu}}</div>
+
+                </div>
+
+                <div class="productInfo" fxLayout="columns wrap" fxLayoutAlign="center">
+                  <div class="productLeftSmall">カテゴリ</div>
+                  <div class="productRightSmall" name="SelectedItemCat">{{selectedItemCat}}</div>
+
+                  <div class="productLeftSmall">商品コード</div>
+                  <div class="productRightSmall" name="selectedItemCode">{{selectedItemCode}}</div>
+
+
+                  <div class="productLeftSmall">価格</div>
+                  <div class="productRightPrice" name="selectedItemPrice">{{selectedItemPrice | currency : 'JPY'}}</div>
+
+                </div>
+                
+                  <div class="DividerDIV">合計価格</div>
+                  <div class="BottomDiv" fxLayout="columns" fxLayoutAlign="center center">
+                  <div class="GrandTotalLeft">合計</div>
+                  <div class="GrandTotalLeft">{{GrandTotal | currency : 'JPY'}}</div>
+                  <div class="GrandTotalRight"><button class="btn orderBtn" id="submit" type="submit">発注</button></div>
+                </div>
+                <!-- <div class="ButtonDiv"> -->
+                <!-- <a class="btn orderBtn" id="logout" (click)="PlaceOrder()">発注</a> -->
+                <!-- <a class="btn orderBtn" id="logout"  type="submit">発注</a> -->
+                <!-- <button class="btn orderBtn" id="submit"  type="submit">発注</button> -->
+                <!-- type="submit" -->
+                <!-- </div> -->
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
+        <!-- <div class="areaSpacer"></div>
+        <div class="okta_banner">
+          <img src="assets/img/okta-japan-logo-dark.png" class="okta_ciam">
+        </div> -->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- routerLink="/mypage" -->

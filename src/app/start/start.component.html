@@ -1,0 +1,34 @@
+<div class="wrapper">
+  <div class="page-header section-dark" style="background:white">
+
+    <div class="mainContainer" fxLayout="row wrap" fxLayoutAlign="center start">
+
+      <div class="mainUserNameItem">
+        {{ OktaGetTokenService.strUserName }}
+      </div>
+
+      <div class="mainMenuItem" fxLayout="columns wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+
+        <button mat-button routerLink="{{ item.link }}" class="btnDiv" *ngFor="let item of appItems">
+          <div class="menuItem" fxLayout="columns wrap">
+            <div class="leftMenuItem">
+              <img src="{{ item.img }}" class="appIcon">
+            </div>
+            <div class="RightMenuItem" fxLayout="columns wrap" fxLayoutAlign="center center">
+
+
+              <div class="appName">{{item.name}}</div>
+              <div class="appDesc">{{item.desc}}</div>
+
+            </div>
+          </div>
+        </button>
+        <div class="areaSpacer"></div>
+        <div class="okta_banner">
+          <img src="assets/img/okta-japan-logo-dark.png" class="okta_ciam">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
