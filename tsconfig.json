@@ -17,5 +17,10 @@
       "dom"
     ],
     "module": "es2015"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "allowSyntheticDefaultImports": true,
   }
+  
 }
