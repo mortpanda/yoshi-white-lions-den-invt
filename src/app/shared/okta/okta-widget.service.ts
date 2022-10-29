@@ -64,7 +64,7 @@ export class OktaWidgetService {
         pkce: OktaPKCE,
         prompt: OktaResMode
       },
-      useInteractionCodeFlow: 'true',
+      useInteractionCodeFlow: true,
       
     });
     console.log(OktaScope)

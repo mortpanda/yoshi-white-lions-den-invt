@@ -26,6 +26,8 @@ export class StartComponent implements OnInit {
   tableDataSource;
   strUserSession: Boolean;
 
+  strThisUser;
+  strEmail;
   async ngOnInit() {
        
     if (localStorage.getItem('orderList') == null) {
@@ -43,29 +45,93 @@ export class StartComponent implements OnInit {
     }
 
 
-    this.authService.token.getUserInfo()
-      .then(function (user) {
-        console.log(user)
-      })
-    this.strUserSession = await this.authService.session.exists()
-      .then(function (exists) {
-        if (exists) {
-          // logged in
-          
-          return exists
-        } else {
-          // not logged in
-          return exists
-        }
-      });
+    this.strUserSession = await this.authService.isAuthenticated();
+    console.log(this.strUserSession)
     switch (this.strUserSession == true) {
       case false:
-        await window.location.replace(this.OktaConfigService.strPostLogoutURL);
+        window.location.replace(this.OktaConfigService.strPostLogoutURL);
       case true:
-        // User is logged in
-        this.OktaGetTokenService.GetAccessToken()
+        this.strThisUser = await this.authService.token.getUserInfo()
+          .then(function (user) {
+            return user
+          })
+          .catch((err) => {
+            console.log(err);
+            window.location.replace(this.OktaConfigService.strPostLogoutURL);
+          })
+        this.strEmail = this.strThisUser.email;
+
         break;
     }
+    console.log(this.strThisUser)
+
+
+    // this.authService.token.getUserInfo()
+    //   .then(function (user) {
+    //     console.log(user)
+    //   })
+    // this.strUserSession = await this.authService.session.exists()
+    //   .then(function (exists) {
+    //     if (exists) {
+    //       // logged in
+          
+    //       return exists
+    //     } else {
+    //       // not logged in
+    //       return exists
+    //     }
+    //   });
+    // switch (this.strUserSession == true) {
+    //   case false:
+    //     await window.location.replace(this.OktaConfigService.strPostLogoutURL);
+    //   case true:
+    //     // User is logged in
+    //     this.OktaGetTokenService.GetAccessToken()
+    //     break;
+    // }
   }
+
+  // async ngOnInit() {
+
+   
+    // if (localStorage.getItem('orderList') == null) {
+    //   // this.tableDataSourceFromDisk = JSON.parse(localStorage.getItem('orderList'));
+    //   // this.tableDataSource = this.tableDataSourceFromDisk;
+      
+    //   localStorage.setItem('orderList', JSON.stringify(this.OrderItems));
+    //   // this.tableDataSource = JSON.parse(localStorage.getItem('orderList'));
+    // }
+    // else {
+      
+    //   //  localStorage.setItem('orderList', JSON.stringify(this.OrderItems));
+    //   // this.tableDataSource = JSON.parse(localStorage.getItem('orderList'));
+    //   // this.tableDataSource = this.tableDataSourceFromDisk;
+    // }
+
+
+    // this.authService.token.getUserInfo()
+    //   .then(function (user) {
+    //     console.log(user)
+    //   })
+    // this.strUserSession = await this.authService.session.exists()
+    //   .then(function (exists) {
+    //     if (exists) {
+    //       // logged in
+          
+    //       return exists
+    //     } else {
+    //       // not logged in
+    //       return exists
+    //     }
+    //   });
+    // switch (this.strUserSession == true) {
+    //   case false:
+    //     await window.location.replace(this.OktaConfigService.strPostLogoutURL);
+    //   case true:
+    //     // User is logged in
+    //     this.OktaGetTokenService.GetAccessToken()
+    //     break;
+    // }
+  // }
 
 }
